@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="jumbotron text-center">
+    <h1>Accueil</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam beatae deleniti alias modi veniam animi culpa. Voluptate voluptatibus obcaecati ad, quisquam quos temporibus mollitia, doloribus nulla consequuntur suscipit ipsam quis!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit incidunt officia sit in quis. Quidem fugiat, eligendi ducimus corporis mollitia voluptatem nobis illum ea iure, dolorum, ipsum consectetur voluptatum ad!</p>
+</div>
+
+<div class="container">
+    <h2>Les dernières offres d'emploies</h2>
+    <div class="row flex">
+        {% for job in jobs %}
+            <div class="col-4">
+                <div class="card bg-dark border border-light rounded">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <a class="text-light text-decoration-none" href="{{ path('app_job_show', {id: job.id, slug: job.slug}) }}">
+                                Nouvelle offre d'emploie de {{ job.company }}
+                            </a>
+                        </h6>
+                        <p class="card-text">{{ job.city }} ({{ job.zipCode }}), {{ job.country }} </p>
+                        <h3 class="text-danger">{{ job.salary }} € / an</h3>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

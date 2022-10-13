@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {% for job in jobs %}
+
+        <div class="jumbotron py-5">
+            <div class="container text-center">
+                <h2>{{ job.company }} recherche un/une {{ job.profession }}</h2>
+                <h3>Salaire annuel de <strong class="text-danger">{{ job.salary }} €</strong></h3>
+            </div>
+        </div>
+
+        <div class="container">
+            <table class="table table-striped-columns text-light">
+                <tr>
+                    <td class="text-light">Entreprise</td>
+                    <td class="text-light">{{ job.company }}</td>
+                </tr>
+                <tr>
+                    <td class="text-light">Profession</td>
+                    <td class="text-light">{{ job.profession }}</td>
+                </tr>
+                <tr>
+                    <td class="text-light">Ville</td>
+                    <td class="text-light">{{ job.city }} ({{ job.zipCode }}), {{ job.country }}</td>
+                </tr>
+                <tr>
+                    <td class="text-light">Contract</td>
+                    <td class="text-light">{{ job.contract }}</td>
+                </tr>
+            </table>
+            <a href="#" class="btn btn-danger small-text rounded-pill text-dark">Postuler</a>
+        </div>
+        
+    {% endfor %}
+{% endblock %}

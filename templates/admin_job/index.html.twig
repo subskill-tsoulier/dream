@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Job index{% endblock %}
+
+{% block body %}
+    <h1 class="text-danger">Gérer les offres d'emploies</h1>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th class="text-light">Id</th>
+                <th class="text-light">Métier</th>
+                <th class="text-light">Contrat</th>
+                <th class="text-light">Adresse</th>
+                <th class="text-light">Entreprise</th>
+                <th class="text-light">Salaires</th>
+                <th class="text-light"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+            <tr>
+                <td class="text-light">{{ job.id }}</td>
+                <td class="text-light">{{ job.profession }}</td>
+                <td class="text-light">{{ job.contract }}</td>
+                <td class="text-light">{{ job.city }} ({{ job.zipCode }}), {{ job.country }}</td>
+                <td class="text-light">{{ job.company }}</td>
+                <td class="text-light">{{ job.salary }} €</td>
+                <td>
+                    <a class="text-danger" href="{{ path('app_admin_job_show', {'id': job.id}) }}"><i class="bi bi-eye"></i></a>
+                    <a class="text-danger" href="{{ path('app_admin_job_edit', {'id': job.id}) }}"><i class="bi bi-pencil-square"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">Aucune offre d'emploie pour l'instant ..</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="container text-center">
+        <a class="text-danger text-decoration-none border border-danger rounded rounded-pill p-2" href="{{ path('app_admin_job_new') }}">Créer une nouvelle offre d'emploie</a>
+    </div>
+{% endblock %}
