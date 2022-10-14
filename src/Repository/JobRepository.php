@@ -45,6 +45,7 @@ class JobRepository extends ServiceEntityRepository
     public function findFourLatest(): array
     {
         return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
             ->setMaxResults(4)
             ->getQuery()
             ->getResult();
