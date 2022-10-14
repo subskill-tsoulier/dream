@@ -4,6 +4,32 @@
 
 {% block body %}
 <div class="container">
-    <h1>Hello world</h1>
+    <h1 class="text-danger">Nouvelles offres d'emploies : </h1>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for job in jobs %}
+            <div class="col">
+                <div class="card bg-dark border border-light">
+                <img src="https://picsum.photos/200" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h1>{{ job.id }}</h1>
+                    <h6 class="card-title">{{ job.company }} recherche un/une {{ job.profession }} à {{ job.city }}, ({{ job.zipCode }})</h6>
+                    <hr>
+                    <p class="card-text">Réf : {{job.ref}}</p>
+                    <p class="card-text">{{ job.description | slice(0, 30)}} .. </p>
+                    <p class="card-text">Publié le {{ job.createdAt|date('l j F o') }}</p>
+                    <p class="card-text">Dernière mise à jour le {{ job.updatedTime|date('l j F o') }}</p>
+                    <a class="btn btn-danger" href="{{ path('app_job_show', {id: job.id, slug: job.slug}) }}">
+                        postuler
+                    </a>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="pagination text-center text-danger">
+            {{ knp_pagination_render(jobs) }}
+        </div>
+    </div>
+    
 </div>
 {% endblock %}

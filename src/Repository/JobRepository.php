@@ -38,7 +38,7 @@ class JobRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    
     /**
      * @return Job[]
      */

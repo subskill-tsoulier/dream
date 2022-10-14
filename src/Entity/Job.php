@@ -63,6 +63,21 @@ class Job
      */
     private $salary;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ref;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $updated_time;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $created_at;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -177,6 +192,42 @@ class Job
     public function setSalary(string $salary): self
     {
         $this->salary = $salary;
+
+        return $this;
+    }
+
+    public function getRef(): ?string
+    {
+        return $this->ref;
+    }
+
+    public function setRef(string $ref): self
+    {
+        $this->ref = $ref;
+
+        return $this;
+    }
+
+    public function getUpdatedTime(): ?string
+    {
+        return $this->updated_time;
+    }
+
+    public function setUpdatedTime(string $updated_time): self
+    {
+        $this->updated_time = $updated_time;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?string
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(string $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }
