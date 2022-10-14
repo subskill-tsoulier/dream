@@ -41,7 +41,7 @@ class JobRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllJob(JobSearch $search)
+    public function findByParamsUrl(JobSearch $search)
     {
         $query = $this->findAllQuery();
 
@@ -65,7 +65,7 @@ class JobRepository extends ServiceEntityRepository
 
         if ($search->getSalaire()) {
             $query = $query
-                ->andWhere('a.value >= :salary')
+                ->andWhere('a.salary > :salary')
                 ->setParameter('salary', $search->getSalaire());
         }
 
@@ -75,11 +75,11 @@ class JobRepository extends ServiceEntityRepository
     /**
      * @return Job[]
      */
-    public function findFourLatest(): array
+    public function findLatestJob($limitJob): array
     {
         return $this->createQueryBuilder('p')
             ->orderBy('p.id', 'DESC')
-            ->setMaxResults(4)
+            ->setMaxResults($limitJob)
             ->getQuery()
             ->getResult();
     }

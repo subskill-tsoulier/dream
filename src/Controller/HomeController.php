@@ -20,7 +20,7 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         return $this->render('home/index.html.twig', [
-            'jobs' => $this->jobRepository->findFourLatest(),
+            'jobs' => $this->jobRepository->findLatestJob(4),
         ]);
     }
 }

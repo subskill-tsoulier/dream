@@ -23,13 +23,12 @@ class JobController extends AbstractController
      */
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
-
         $search = new JobSearch();
         $form = $this->createForm(JobSearchType::class, $search);
         $form->handleRequest($request);
 
         $paginator = $paginator->paginate(
-            $this->jobRepository->findAllJob($search),
+            $this->jobRepository->findByParamsUrl($search),
             $request->query->getInt('page', 1),
             12,
         );
