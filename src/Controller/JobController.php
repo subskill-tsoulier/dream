@@ -29,7 +29,7 @@ class JobController extends AbstractController
         $form->handleRequest($request);
 
         $paginator = $paginator->paginate(
-            $this->jobRepository->findAll(),
+            $this->jobRepository->findAllJob($search),
             $request->query->getInt('page', 1),
             12,
         );

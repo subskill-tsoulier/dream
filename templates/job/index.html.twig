@@ -3,9 +3,29 @@
 {% block title %}Hello JobController!{% endblock %}
 
 {% block body %}
+<div class="jumbotron">
+    <div class="container">
+        {{ form_start(form) }}
+            <div class="form-row d-flex">
+                <div class="col">
+                    {{ form_row(form.profession) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.contract) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.company) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.salaire) }}
+                </div>
+                <button type="submit" class="btn btn-danger">Rechercher</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
 <div class="container">
     <h1 class="text-danger">Nouvelles offres d'emploies : </h1>
-
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for job in jobs %}
             <div class="col">

@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Job;
+use App\Entity\JobSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,6 +40,37 @@ class JobRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findAllJob(JobSearch $search)
+    {
+        $query = $this->findAllQuery();
+
+        if ($search->getProfession()) {
+            $query = $query
+                ->andWhere('a.profession = :profession')
+                ->setParameter('profession', $search->getProfession());
+        }
+
+        if ($search->getContract()) {
+            $query = $query
+                ->andWhere('a.contract = :contract')
+                ->setParameter('contract', $search->getContract());
+        }
+
+        if ($search->getCompany()) {
+            $query = $query
+                ->andWhere('a.company = :company')
+                ->setParameter('company', $search->getCompany());
+        }
+
+        if ($search->getSalaire()) {
+            $query = $query
+                ->andWhere('a.value >= :salary')
+                ->setParameter('salary', $search->getSalaire());
+        }
+
+        return $query->getQuery();
+    }
     
     /**
      * @return Job[]
@@ -49,6 +82,12 @@ class JobRepository extends ServiceEntityRepository
             ->setMaxResults(4)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findAllQuery(): QueryBuilder
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.id != 0');
     }
 
 //    /**

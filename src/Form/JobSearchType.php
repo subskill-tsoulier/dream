@@ -19,6 +19,7 @@ class JobSearchType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Métier',
+                    'class' => 'border border-danger bg-dark text-danger rounded rounded-pill w-75 p-2',
                 ]
             ])
             ->add('contract', TextType::class, [
@@ -26,6 +27,7 @@ class JobSearchType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Contrat',
+                    'class' => 'border border-danger bg-dark text-danger rounded rounded-pill w-75 p-2',
                 ]
             ])
             ->add('company', TextType::class, [
@@ -33,6 +35,7 @@ class JobSearchType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Entreprise',
+                    'class' => 'border border-danger bg-dark text-danger rounded rounded-pill w-75 p-2',
                 ]
             ])
             ->add('salaire', IntegerType::class, [
@@ -40,6 +43,7 @@ class JobSearchType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Salaire',
+                    'class' => 'border border-danger bg-dark text-danger rounded rounded-pill w-75 p-2',
                 ]
             ])
         ;
@@ -52,5 +56,10 @@ class JobSearchType extends AbstractType
             'method' => 'get',
             'csrf_protection' => false,
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }
