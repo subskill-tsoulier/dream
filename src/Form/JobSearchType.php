@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\JobSearch;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,36 +15,75 @@ class JobSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('profession', TextType::class, [
-                'required' => false,
+            ->add('profession', ChoiceType::class, [
                 'label' => false,
+                'required' => false,
+                'choices' => [
+                    'Choisir une métier' => '',
+                    'Ingénieur' => 'Ingénieur',
+                    'Développeur Full Stack' => 'Développeur Full Stakc',
+                    'Développeur Back' => 'Développeur Back',
+                    'Développeur Front' => 'Développeur Front',
+                    'DevOps' => 'DevOps',
+                    'SysAdmin' => 'SysAdmin',
+                ],
                 'attr' => [
-                    'placeholder' => 'Métier',
-                    'class' => 'border border-danger bg-dark text-danger rounded rounded-pill w-75 p-2',
+                    'class' => 'form-select form-select-sm bg-dark text-danger p-2 my-2',
                 ]
             ])
-            ->add('contract', TextType::class, [
-                'required' => false,
+            ->add('contract', ChoiceType::class, [
                 'label' => false,
+                'required' => false,
+                'choices' => [
+                    'Choisir une contrat' => '',
+                    'CDI' => 'CDI',
+                    'CDD' => 'CDD',
+                    'Alternance' => 'Alternance',
+                    'Intérim' => 'Intérim',
+                    'Freelance' => 'Freelance',
+                    'Stage' => 'Stage',
+                ],
                 'attr' => [
-                    'placeholder' => 'Contrat',
-                    'class' => 'border border-danger bg-dark text-danger rounded rounded-pill w-75 p-2',
+                    'class' => 'form-select form-select-sm bg-dark text-danger p-2 my-2',
                 ]
             ])
-            ->add('company', TextType::class, [
-                'required' => false,
+            ->add('company', ChoiceType::class, [
                 'label' => false,
+                'required' => false,
+                'choices' => [
+                    'Choisir une entreprise' => '',
+                    'Subskill' => 'Subskill',
+                    'Amazon Web Service' => 'AWS',
+                    'Thales' => 'Thales',
+                    'Capgemini' => 'Capgemini',
+                    'Festina' => 'Festina',
+                ],
                 'attr' => [
-                    'placeholder' => 'Entreprise',
-                    'class' => 'border border-danger bg-dark text-danger rounded rounded-pill w-75 p-2',
+                    'class' => 'form-select form-select-sm bg-dark text-danger p-2 my-2',
                 ]
             ])
-            ->add('salaire', IntegerType::class, [
-                'required' => false,
+            ->add('filterOrder', ChoiceType::class, [
                 'label' => false,
+                'required' => false,
+                'choices' => [
+                    'Trier les offres par date' => '',
+                    'Afficher les dernières offres' => 'ASC',
+                    'Afficher les offres les plus anciennes' => 'DESC',
+                ],
                 'attr' => [
-                    'placeholder' => 'Salaire',
-                    'class' => 'border border-danger bg-dark text-danger rounded rounded-pill w-75 p-2',
+                    'class' => 'form-select form-select-sm bg-dark text-danger p-2 my-2',
+                ]
+            ])
+            ->add('filterOrderAlphabetic', ChoiceType::class, [
+                'label' => false,
+                'required' => false,
+                'choices' => [
+                    'Trier les offres par ordre alphabétique' => '',
+                    'Ranger de A à Z' => 'ASC',
+                    'Ranger de Z à A' => 'DESC',
+                ],
+                'attr' => [
+                    'class' => 'form-select form-select-sm bg-dark text-danger p-2 my-2',
                 ]
             ])
         ;

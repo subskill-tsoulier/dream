@@ -21,9 +21,14 @@ class JobSearch
     private $company;
 
     /**
-     * @var int|null
+     * @var string|ASC
      */
-    private $salaire;
+    private $filterOrder;
+
+    /**
+     * @var string|ASC
+     */
+    private $filterOrderAlphabetic;
 
     /**
      * @param string|null
@@ -78,22 +83,40 @@ class JobSearch
     {
         return $this->company;
     }
-
+    
     /**
-     * @param int|null
+     * @param string|ASC
      * @return JobSearch
      */
-    public function setSalaire(?int $salaire): JobSearch
+    public function setFilterOrder(?string $filterOrder): JobSearch
     {
-        $this->salaire = $salaire;
+        $this->filterOrder = $filterOrder;
         return $this;
-    } 
+    }
 
     /**
-     * @return string|null
+     * @param string|ASC
      */
-    public function getSalaire(): ?int
+    public function getFilterOrder(): ?string
     {
-        return $this->salaire;
+        return $this->filterOrder;
+    }
+
+    /**
+     * @param string|ASC
+     * @return JobSearch
+     */
+    public function setFilterOrderAlphabetic(?string $filterOrderAlphabetic): JobSearch
+    {
+        $this->filterOrderAlphabetic = $filterOrderAlphabetic;
+        return $this;
+    }
+
+    /**
+     * @param string|ASC
+     */
+    public function getFilterOrderAlphabetic(): ?string
+    {
+        return $this->filterOrderAlphabetic;
     }
 }

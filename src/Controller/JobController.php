@@ -6,16 +6,19 @@ use App\Entity\JobSearch;
 use App\Form\JobSearchType;
 use App\Repository\JobRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+
 
 class JobController extends AbstractController
 {
-    public function __construct(JobRepository $jobRepository)
+    public function __construct(JobRepository $jobRepository, HttpClientInterface $client)
     {
         $this->jobRepository = $jobRepository;
+        $this->client = $client;
     }
 
     /**
@@ -23,19 +26,24 @@ class JobController extends AbstractController
      */
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
+
+        $nbrCall = 12;
+        $response = $this->client->request('GET', "https://aws.random.cat/meow")->toArray();
+
         $search = new JobSearch();
         $form = $this->createForm(JobSearchType::class, $search);
         $form->handleRequest($request);
-
-        $paginator = $paginator->paginate(
+        
+        $jobs = $paginator->paginate(
             $this->jobRepository->findByParamsUrl($search),
             $request->query->getInt('page', 1),
-            12,
+            $nbrCall,
         );
 
         return $this->render('job/index.html.twig', [
-            'jobs' => $paginator,
+            'jobs' => $jobs,
             'form' => $form->createView(),
+            'img' => $response,
         ]);
     }
 

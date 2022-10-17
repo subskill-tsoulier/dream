@@ -63,10 +63,14 @@ class JobRepository extends ServiceEntityRepository
                 ->setParameter('company', $search->getCompany());
         }
 
-        if ($search->getSalaire()) {
+        if ($search->getfilterOrder()) {
             $query = $query
-                ->andWhere('a.salary > :salary')
-                ->setParameter('salary', $search->getSalaire());
+                ->orderBy('a.id', $search->getfilterOrder());
+        }
+
+        if ($search->getfilterOrderAlphabetic()) {
+            $query = $query
+                ->orderBy('a.company', $search->getfilterOrderAlphabetic());
         }
 
         return $query->getQuery();
