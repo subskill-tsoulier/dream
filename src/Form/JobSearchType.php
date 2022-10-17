@@ -62,6 +62,25 @@ class JobSearchType extends AbstractType
                     'class' => 'form-select form-select-sm bg-dark text-danger p-2 my-2',
                 ]
             ])
+            ->add('city', ChoiceType::class, [
+                'label' => false,
+                'required' => false,
+                'choices' => [
+                    'Choisir une ville' => '',
+                    'Paris' => 'Paris',
+                    'Marseille' => 'Marseilles',
+                    'Lyon' => 'Lyon',
+                    'New York' => 'New York',
+                    'Los Angeles' => 'Los Angeles',
+                    'Rome' => 'Rome',
+                    'Palerme' => 'Palerme',
+                    'Londre' => 'Londer',
+                    'Tokyo' => 'Tokyo',
+                ],
+                'attr' => [
+                    'class' => 'form-select form-select-sm bg-dark text-danger p-2 my-2',
+                ]
+            ])
             ->add('filterOrder', ChoiceType::class, [
                 'label' => false,
                 'required' => false,

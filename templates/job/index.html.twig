@@ -9,6 +9,7 @@
                 {{ form_row(form.profession) }}
                 {{ form_row(form.contract) }}
                 {{ form_row(form.company) }}
+                {{ form_row(form.city) }}
                 {{ form_row(form.filterOrder) }}
                 {{ form_row(form.filterOrderAlphabetic) }}
                 <a href="{{ path('app_job') }}" class="btn btn-danger">Réinitialiser les filtres</a>
@@ -23,16 +24,14 @@
         {% for job in jobs %}
             <div class="col">
                 <div class="card bg-dark border border-light">
-
-                <img src="{{ img['file'] }}" class="card-img-top" alt="...">
+                <img src="{{  job.getUrlImg() }}" style="height: 300px; object-fit: cover;" class="card-img-top" alt="...">
                 <div class="card-body">
-                <h1>{{ job.id }}</h1>
-                    <h6 class="card-title">{{ job.company }} recherche un/une {{ job.profession }} à {{ job.city }}, ({{ job.zipCode }})</h6>
+                    <h6 class="card-title">{{ job.getCompany() }} recherche un/une {{ job.getProfession() }} à {{ job.getCity() }}, ({{ job.getZipCode() }})</h6>
                     <hr>
-                    <p class="card-text">Réf : {{job.ref}}</p>
-                    <p class="card-text">{{ job.description | slice(0, 30)}} .. </p>
-                    <p class="card-text">Publié le {{ job.createdAt|date('l j F o') }}</p>
-                    <p class="card-text">Dernière mise à jour le {{ job.updatedTime|date('l j F o') }}</p>
+                    <p class="card-text">Réf : {{ job.getRef() }}</p>
+                    <p class="card-text">{{ job.getDescription() | slice(0, 30)}} .. </p>
+                    <p class="card-text">Publié le {{ job.getCreatedAt() |date('l j F o') }}</p>
+                    <p class="card-text">Dernière mise à jour le {{ job.getUpdatedTime() |date('l j F o') }}</p>
                     <a class="btn btn-danger" href="{{ path('app_job_show', {id: job.id, slug: job.slug}) }}">
                         postuler
                     </a>

@@ -21,6 +21,11 @@ class JobSearch
     private $company;
 
     /**
+     * @var string|null
+     */
+    private $city;
+
+    /**
      * @var string|ASC
      */
     private $filterOrder;
@@ -82,6 +87,24 @@ class JobSearch
     public function getCompany(): ?string
     {
         return $this->company;
+    }
+
+    /**
+     * @param string|null
+     * @return JobSearch
+     */
+    public function setCity(?string $city): JobSearch
+    {
+        $this->city = $city;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCity(): ?string
+    {
+        return $this->city;
     }
     
     /**

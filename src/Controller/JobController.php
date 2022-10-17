@@ -27,9 +27,6 @@ class JobController extends AbstractController
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
 
-        $nbrCall = 12;
-        $response = $this->client->request('GET', "https://aws.random.cat/meow")->toArray();
-
         $search = new JobSearch();
         $form = $this->createForm(JobSearchType::class, $search);
         $form->handleRequest($request);
@@ -37,13 +34,12 @@ class JobController extends AbstractController
         $jobs = $paginator->paginate(
             $this->jobRepository->findByParamsUrl($search),
             $request->query->getInt('page', 1),
-            $nbrCall,
+            12,
         );
 
         return $this->render('job/index.html.twig', [
             'jobs' => $jobs,
             'form' => $form->createView(),
-            'img' => $response,
         ]);
     }
 

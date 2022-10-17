@@ -78,6 +78,11 @@ class Job
      */
     private $created_at;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $url_img;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -228,6 +233,18 @@ class Job
     public function setCreatedAt(string $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUrlImg(): ?string
+    {
+        return $this->url_img;
+    }
+
+    public function setUrlImg(string $url_img): self
+    {
+        $this->url_img = $url_img;
 
         return $this;
     }
